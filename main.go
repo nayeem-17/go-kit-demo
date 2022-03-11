@@ -8,7 +8,7 @@ import (
 	"demo-go-kit/account/controller"
 	db_config "demo-go-kit/account/database"
 	"demo-go-kit/account/repository"
-	"demo-go-kit/account/server"
+	server "demo-go-kit/account/transport"
 	"net/http"
 	"os"
 	"os/signal"
@@ -18,8 +18,6 @@ import (
 
 	"github.com/go-kit/kit/log/level"
 )
-
-const dbsource = "postgresql://postgres:postgres@localhost:5432/gokitexample?sslmode=disable"
 
 func main() {
 
@@ -47,8 +45,7 @@ func main() {
 	var srv controller.Service
 	{
 		repository := repository.NewRepo(db, logger)
-
-		srv = controller.NewService(repository, logger)
+		srv = controller.NewService(repository, logger, ctx)
 	}
 
 	errs := make(chan error)

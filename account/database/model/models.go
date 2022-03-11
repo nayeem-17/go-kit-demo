@@ -1,4 +1,4 @@
-package database
+package model
 
 import (
 	"time"
@@ -7,7 +7,7 @@ import (
 )
 
 type (
-	User struct {
+	User1 struct {
 		ID               primitive.ObjectID `json:"id" bson:"_id"`
 		Name             string             `json:"name" bson:"name"`
 		Login            string             `json:"login" bson:"login"`

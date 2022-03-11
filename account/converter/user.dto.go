@@ -1,4 +1,4 @@
-package dto
+package converter
 
 type (
 	CreateUserRequest struct {

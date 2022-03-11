@@ -3,7 +3,7 @@ package server
 import (
 	"context"
 	service "demo-go-kit/account/controller"
-	dto "demo-go-kit/account/controller/dto"
+	dto "demo-go-kit/account/converter"
 
 	"github.com/go-kit/kit/endpoint"
 )

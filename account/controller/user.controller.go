@@ -2,7 +2,7 @@ package controller
 
 import (
 	"context"
-	model "demo-go-kit/account/model"
+	model "demo-go-kit/account/database/model"
 	r "demo-go-kit/account/repository"
 
 	"github.com/go-kit/kit/log"
@@ -10,19 +10,21 @@ import (
 	"github.com/gofrs/uuid"
 )
 
-type service struct {
-	repostory r.Repository
-	logger    log.Logger
+type Controller struct {
+	repository r.Repository
+	logger     log.Logger
+	ctx        context.Context
 }
 
-func NewService(rep r.Repository, logger log.Logger) Service {
-	return &service{
-		repostory: rep,
-		logger:    logger,
+func NewService(rep r.Repository, logger log.Logger, ctx context.Context) Service {
+	return &Controller{
+		repository: rep,
+		logger:     logger,
+		ctx:        ctx,
 	}
 }
 
-func (s service) CreateUser(ctx context.Context, email string, password string) (string, error) {
+func (s Controller) CreateUser(ctx context.Context, email string, password string) (string, error) {
 	logger := log.With(s.logger, "method", "CreateUser")
 
 	uuid, _ := uuid.NewV4()
@@ -33,7 +35,7 @@ func (s service) CreateUser(ctx context.Context, email string, password string) 
 		Password: password,
 	}
 
-	if err := s.repostory.CreateUser(ctx, user); err != nil {
+	if err := s.repository.CreateUser(ctx, user); err != nil {
 		level.Error(logger).Log("err", err)
 		return "", err
 	}
@@ -43,10 +45,10 @@ func (s service) CreateUser(ctx context.Context, email string, password string) 
 	return "Success", nil
 }
 
-func (s service) GetUser(ctx context.Context, id string) (string, error) {
+func (s Controller) GetUser(ctx context.Context, id string) (string, error) {
 	logger := log.With(s.logger, "method", "GetUser")
 
-	email, err := s.repostory.GetUser(ctx, id)
+	email, err := s.repository.GetUser(ctx, id)
 
 	if err != nil {
 		level.Error(logger).Log("err", err)

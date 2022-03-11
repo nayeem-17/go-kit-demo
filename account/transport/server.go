@@ -2,11 +2,11 @@ package server
 
 import (
 	"context"
-	decoder "demo-go-kit/account/controller/decoder"
-	encoder "demo-go-kit/account/controller/encoder"
+	converter "demo-go-kit/account/converter"
+	"net/http"
+
 	httptransport "github.com/go-kit/kit/transport/http"
 	"github.com/gorilla/mux"
-	"net/http"
 )
 
 func NewHTTPServer(ctx context.Context, endpoints Endpoints) http.Handler {
@@ -15,14 +15,14 @@ func NewHTTPServer(ctx context.Context, endpoints Endpoints) http.Handler {
 
 	r.Methods("POST").Path("/user").Handler(httptransport.NewServer(
 		endpoints.CreateUser,
-		decoder.DecodeUserReq,
-		encoder.EncodeResponse,
+		converter.DecodeUserReq,
+		converter.EncodeResponse,
 	))
 
 	r.Methods("GET").Path("/user/{id}").Handler(httptransport.NewServer(
 		endpoints.GetUser,
-		decoder.DecodeEmailReq,
-		encoder.EncodeResponse,
+		converter.DecodeEmailReq,
+		converter.EncodeResponse,
 	))
 
 	return r

@@ -2,7 +2,7 @@ package repository
 
 import (
 	"context"
-	model "demo-go-kit/account/model"
+	model "demo-go-kit/account/database/model"
 )
 
 type Repository interface {

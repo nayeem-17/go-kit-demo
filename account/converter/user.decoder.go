@@ -1,8 +1,7 @@
-package decoder
+package converter
 
 import (
 	"context"
-	dto "demo-go-kit/account/controller/dto"
 	"encoding/json"
 	"net/http"
 
@@ -10,7 +9,7 @@ import (
 )
 
 func DecodeUserReq(ctx context.Context, r *http.Request) (interface{}, error) {
-	var req dto.CreateUserRequest
+	var req CreateUserRequest
 	err := json.NewDecoder(r.Body).Decode(&req)
 	if err != nil {
 		return nil, err
@@ -19,10 +18,10 @@ func DecodeUserReq(ctx context.Context, r *http.Request) (interface{}, error) {
 }
 
 func DecodeEmailReq(ctx context.Context, r *http.Request) (interface{}, error) {
-	var req dto.GetUserRequest
+	var req GetUserRequest
 	vars := mux.Vars(r)
 
-	req = dto.GetUserRequest{
+	req = GetUserRequest{
 		Id: vars["id"],
 	}
 	return req, nil
