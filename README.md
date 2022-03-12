@@ -5,9 +5,9 @@
 -   Go-kit
 -   MongoDB 
 ## API list
-- GET  /account/{id}    
+- **GET**  `/user/{id}`    
     for fetching an account by id. 
-- POST /account/    
+- **POST** `/user/`    
     for creating an account.
 
 ## Project structure:      
