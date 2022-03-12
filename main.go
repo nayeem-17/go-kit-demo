@@ -5,6 +5,8 @@ import (
 	"flag"
 	"fmt"
 
+	_ "github.com/joho/godotenv/autoload"
+
 	"demo-go-kit/account/controller"
 	db_config "demo-go-kit/account/database"
 	"demo-go-kit/account/repository"

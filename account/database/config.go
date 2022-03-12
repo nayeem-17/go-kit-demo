@@ -9,7 +9,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-const mongoSource = "mongodb://root:example@localhost:27017/"
+// const mongoSource = "mongodb://root:example@localhost:27017/"
+var mongoSource = os.Getenv("MONGO_URI")
 
 func GetDatabase(ctx context.Context, database_name string) *mongo.Database {
 	serverAPIOptions := options.ServerAPI(options.ServerAPIVersion1)
