@@ -1,4 +1,4 @@
-package model
+package main
 
 import (
 	"time"
@@ -7,7 +7,7 @@ import (
 )
 
 type (
-	User1 struct {
+	User struct {
 		ID               primitive.ObjectID `json:"id" bson:"_id"`
 		Name             string             `json:"name" bson:"name"`
 		Login            string             `json:"login" bson:"login"`
@@ -46,6 +46,23 @@ type (
 		Content     string             `json:"content" bson:"content"`
 		Thumbnail   string             `json:"thumbnail" bson:"thumbnail"`
 		Duration    string             `json:"duration" bson:"duration"`
+	}
+	Progress struct {
+		ID         primitive.ObjectID `json:"id" bson:"_id"`
+		UserID     primitive.ObjectID `json:"user_id" bson:"user_id"`
+		CourseID   primitive.ObjectID `json:"course_id" bson:"course_id"`
+		ContentID  primitive.ObjectID `json:"content_id" bson:"content_id"`
+		CreatedAt  time.Time          `json:"created_at" bson:"created_at"`
+		UpdatedAt  time.Time          `json:"updated_at" bson:"updated_at"`
+		Progress   int                `json:"progress" bson:"progress"` // in percentage
+		IsFinished bool               `json:"is_finished" bson:"is_finished"`
+	}
+	Cart struct {
+		ID        primitive.ObjectID   `json:"id" bson:"_id"`
+		UserID    primitive.ObjectID   `json:"user_id" bson:"user_id"`
+		CourseID  []primitive.ObjectID `json:"course_id" bson:"course_id"`
+		CreatedAt time.Time            `json:"created_at" bson:"created_at"`
+		UpdatedAt time.Time            `json:"updated_at" bson:"updated_at"`
 	}
 	CourseInstructor struct {
 		ID           primitive.ObjectID `json:"id" bson:"_id"`
