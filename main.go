@@ -2,23 +2,20 @@ package main
 
 import (
 	"context"
-	"flag"
-	"fmt"
-
-	_ "github.com/joho/godotenv/autoload"
-
 	"demo-go-kit/account/controller"
 	db_config "demo-go-kit/account/database"
 	"demo-go-kit/account/repository"
 	server "demo-go-kit/account/transport"
+	"flag"
+	"fmt"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"github.com/go-kit/kit/log"
-
 	"github.com/go-kit/kit/log/level"
+	_ "github.com/joho/godotenv/autoload"
 )
 
 func main() {
